@@ -1,0 +1,224 @@
+.display{
+  --width: 20rem;
+  --color: hsl(333 66% 75%);
+  --skew: 1rem;
+  --animation-duration: 10s;
+  aspect-ratio: 1/.5;
+  width: var(--width);
+  border-top-left-radius: 50% var(--skew);
+  border-top-right-radius: 50% var(--skew);
+  background:
+    radial-gradient( 100% 100%,
+      var(--color) calc(50% - 1px), #0000 calc(50% + 1px)
+    ) top center / 100% calc(var(--skew) * 2) no-repeat,
+    linear-gradient(  90deg,
+      color-mix(in oklch, var(--color), hsl(0 0% 100% / .75)),
+      #0000 40% 60%,
+      color-mix(in oklch, var(--color), hsl(0 0% 0% / .5))
+    ),
+    radial-gradient( 100% 100%,
+      color-mix(in oklch, var(--color), hsl(0 0% 20%)) calc(50% - 1px), #0000 calc(50% + 1px)
+    ) top center / 100% calc(var(--skew) * 2 + 7.5%) no-repeat,
+    repeating-linear-gradient(90deg,
+      #0000 0 1.25%, hsl(0 0% 0% / .125) 1.25% 2.5%
+    ) center left / 200% 100%,
+    var(--color);
+  box-shadow:
+    calc(var(--width) * .125) 
+    calc(var(--width) * .125) 
+    calc(var(--width) * .25) 
+    color-mix(in oklch, var(--color), hsl(0 0% 0% / .75));
+  animation: rotateBG calc(var(--animation-duration) / 2) linear infinite;
+  position: relative;
+  
+  >svg {
+    color: #e60023;
+    position: absolute;
+    width: 80%;
+    left: 10%;
+    bottom: calc(100% - var(--skew));
+    animation: palpite 1.5s ease-in-out infinite;
+    transform-origin: center;
+  }
+}
+@keyframes palpite {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+@keyframes rotateBG { to { background-position: -100% 0 } }
+
+html, body { height: 100% }
+body { 
+  margin: 0; 
+  background: hsl(327, 90%, 92%);
+  display: grid;
+  place-items: end center
+}
+
+h1 {
+  font-family: 'Arial', sans-serif;
+  font-size: 3em;
+  color: #ff69b4;
+  text-align: center;
+  margin-bottom: 280px;
+  position: relative;
+  animation: fadeIn 3s ease-in-out, colorChange 5s infinite;
+  text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4, 0 0 30px #ff69b4;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    top: -20px;
+    bottom: 80px;
+  }
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}
+
+@keyframes colorChange {
+  0%, 100% {
+    color: #ff69b4;
+  }
+  25% {
+    color: #c63a3a;
+  }
+  50% {
+    color: #8a2be2;
+  }
+  75% {
+    color: #4b0082;
+  }
+}
+
+.display svg {
+  cursor: pointer;
+  transition: filter 0.3s;
+}
+
+.display svg:hover {
+  filter: drop-shadow(0 0 10px #ff69b4);
+}
+
+.carta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%) scaleY(0);
+  opacity: 0;
+  z-index: 10;
+  width: 500px;
+  max-width: 90vw;
+  padding: 30px 10px;
+  background: #fff0f6;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px #ff69b4aa;
+  transition: transform 0.5s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.5s;
+}
+
+.carta.abierta {
+  transform: translate(-50%, -50%) scaleY(1);
+  opacity: 1;
+}
+
+p {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.2em;
+  color: #333;
+  margin: 0;
+  text-align: center;
+
+}
+
+strong {
+  color: #ff69b4;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff0f6;
+  margin: auto;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px #ff69b4aa;
+  width: 900px;
+  max-width: 1000px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.close {
+  color: #ff69b4;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: rgba(255,255,255,0.7);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 2em;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 8px #ff69b4aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.close:hover {
+  background: #ff69b4;
+  color: #fff;
+  transform: scale(1.15) rotate(10deg);
+}
+
+.close-carta {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2em;
+  color: #ff69b4;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 2;
+  transition: color 0.2s;
+}
+.close-carta:hover {
+  color: #e60023;
+}
+
+.VerVideo {
+  background: #ff69b4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: background-color 0.3s, transform 0.3s;
+}

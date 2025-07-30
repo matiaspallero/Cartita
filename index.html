@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para mi Tulu</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="assets/heart_like_love_twitter_icon_127132.ico">
+</head>
+<body>
+<h1>Te amo mi Tulu❤️</h1>
+<div class="display">
+  <svg id="btnCarta" viewBox="0 0 100 92">
+    <path d="M8.57864 8.57864C20.0168 -2.85955 38.5618 -2.85955 50 8.57864C61.4382 -2.85955 79.9832 -2.85955 91.4214 8.57864C102.86 20.0168 102.86 38.5618 91.4214 50C91.4162 50.0052 91.411 50.0104 91.4058 50.0156L50 91.4213L8.59924 50.0206C8.59237 50.0137 8.58551 50.0069 8.57864 50C-2.85955 38.5618 -2.85955 20.0168 8.57864 8.57864Z" fill="currentcolor"/>
+  </svg>
+</div>
+<div id="carta" class="carta">
+  <button id="btnCerrarCarta" class="close-carta">x</button>
+  <p>¡Hola mi tulu! Esta es tu <strong> carta especial💌</strong></p>
+  <p>Sos lo mejor que me pudo haber pasado, volvería</p>
+  <p>a esa noche miles de veces para volverte a conocer.</p>
+  <p>Gracias por abrirme tu corazón y mostrarme como sos</p>
+  <p>sos un ser de luz mi tulu.</p>
+  <p>Gracias por todo lo que haces por mi, por tu apoyo,</p>
+  <p>por tu amor, por tu paciencia y por todo lo que me</p>
+  <p>enseñas cada día. Sos una persona increíble y</p>
+  <p>me siento afortunado de tenerte a mi lado.</p>
+  <p>Te amo con todo mi corazón Tulu🥺❤️</p>
+  <button id="btnVideoCarta" class="VerVideo">Ver video</button>
+</div>
+<div id="modalVideo" class="modal">
+  <div class="modal-content">
+    <button id="closeModal" class="close">×</button>
+    <video id="videoCarta" width="100%" controls>
+      <source src="assets/Mi-tulu.mp4" type="video/mp4">
+      Tu navegador no soporta el video.
+    </video>
+  </div>
+</div>
+<script>
+  const modal = document.getElementById('modalVideo');
+  const video = document.getElementById('videoCarta');
+
+  document.getElementById('btnCarta').onclick = function() {
+    document.getElementById('carta').classList.toggle('abierta');
+  }
+  document.getElementById('btnVideoCarta').onclick = function() {
+    modal.style.display = 'flex';
+    video.currentTime = 0;
+    video.play();
+  }
+  document.getElementById('closeModal').onclick = function() {
+    modal.style.display = 'none';
+    video.pause();
+    video.currentTime = 0;
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      video.pause();
+      video.currentTime = 0;
+    }
+  }
+  document.getElementById('btnCerrarCarta').onclick = function() {
+    document.getElementById('carta').classList.remove('abierta');
+  }
+</script>
+</body>
+</html>
